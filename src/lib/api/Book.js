@@ -39,15 +39,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getMovieList = void 0;
+exports.getBookList = void 0;
 var axios_1 = __importDefault(require("axios"));
-exports.getMovieList = function (query, display) { return __awaiter(void 0, void 0, void 0, function () {
+var dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+exports.getBookList = function (query, display) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, axios_1.default.get("/v1/search/movie.json?query=" + query + "&display=" + display, {
+            case 0: return [4 /*yield*/, axios_1.default.get("/v1/search/book.json?query=" + query + "&display=" + display, {
                     headers: {
                         "X-Naver-Client-Id": "VWn8d_Kescc7tCMaYjkx",
-                        "X-Naver-Client-Secret": "YOvbZD8FiW",
+                        "X-Naver-Client-Secret": process.env.REACT_APP_API_SECRET,
                     },
                 })];
             case 1: return [2 /*return*/, _a.sent()];

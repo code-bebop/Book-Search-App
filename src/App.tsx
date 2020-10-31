@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 
-import MovieList from "./components/MovieList";
-import { getMovieList } from "./lib/api/Movie";
+import BookList from "./components/BookList";
+import { getBookList } from "./lib/api/Book";
 
 const Wrapper = styled.div`
   width: 1024px;
@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const SearchMovieForm = styled.form`
+const SearchBookForm = styled.form`
   margin-top: 60px;
   text-align: center;
   & > input {
@@ -33,7 +33,7 @@ const SearchMovieForm = styled.form`
   }
 `;
 
-const MovieMessage = styled.p`
+const BookMessage = styled.p`
   color: #fff;
   font-size: 3rem;
 `;
@@ -58,7 +58,7 @@ const App = () => {
         setLoading(true);
         const {
           data: { items: data },
-        } = await getMovieList(query, display);
+        } = await getBookList(query, display);
         setItems(data);
         setDisplay(display + 10);
         console.log(display);
@@ -118,14 +118,14 @@ const App = () => {
 
   return (
     <Wrapper>
-      <SearchMovieForm onSubmit={getData}>
+      <SearchBookForm onSubmit={getData}>
         <input onChange={onInputChange} value={query} />
         <button type="submit">검색</button>
-      </SearchMovieForm>
+      </SearchBookForm>
       {items ? (
-        <MovieList items={items} />
+        <BookList items={items} />
       ) : (
-        <MovieMessage>검색을 해 주십시오</MovieMessage>
+        <BookMessage>검색을 해 주십시오</BookMessage>
       )}
     </Wrapper>
   );

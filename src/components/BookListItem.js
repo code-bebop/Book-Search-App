@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const MovieListItemBlock = styled.li`
+const BookListItemBlock = styled.li`
   color: #fff;
   background-color: rgba(0, 0, 0, 0.4);
   width: 100%;
@@ -51,16 +51,9 @@ const MovieListItemBlock = styled.li`
   }
 `;
 
-const MovieListItem = ({
-  image,
-  title,
-  userRating,
-  pubDate,
-  director,
-  actor,
-}) => {
+const BookListItem = ({ image, title, price, author, pubdate }) => {
   return (
-    <MovieListItemBlock>
+    <BookListItemBlock>
       <div className="Wrapper">
         <img
           src={image}
@@ -69,19 +62,17 @@ const MovieListItem = ({
         <div>
           <h3>{title.replace(/<b>/gi, "").replace(/<\/b>/gi, "")}</h3>
           <dl>
-            <dt>평점</dt>
-            <dd>{userRating}</dd>
-            <dt>개봉일</dt>
-            <dd>{pubDate}</dd>
-            <dt>감독</dt>
-            <dd>{director}</dd>
-            <dt>배우</dt>
-            <dd>{actor}</dd>
+            <dt>정가</dt>
+            <dd>{price}</dd>
+            <dt>저자</dt>
+            <dd>{author}</dd>
+            <dt>출간일</dt>
+            <dd>{pubdate}</dd>
           </dl>
         </div>
       </div>
-    </MovieListItemBlock>
+    </BookListItemBlock>
   );
 };
 
-export default MovieListItem;
+export default BookListItem;

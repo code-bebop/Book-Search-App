@@ -64,11 +64,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var styled_components_1 = __importDefault(require("styled-components"));
-var MovieList_1 = __importDefault(require("./components/MovieList"));
-var Movie_1 = require("./lib/api/Movie");
+var BookList_1 = __importDefault(require("./components/BookList"));
+var Book_1 = require("./lib/api/Book");
 var Wrapper = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: 1024px;\n  margin: 0 auto;\n\n  @media (max-width: 1024px) {\n    width: 768px;\n  }\n\n  @media (max-width: 768px) {\n    width: 100%;\n  }\n"], ["\n  width: 1024px;\n  margin: 0 auto;\n\n  @media (max-width: 1024px) {\n    width: 768px;\n  }\n\n  @media (max-width: 768px) {\n    width: 100%;\n  }\n"])));
-var SearchMovieForm = styled_components_1.default.form(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  margin-top: 60px;\n  text-align: center;\n  & > input {\n    color: white;\n    background-color: transparent;\n    border: none;\n    border-bottom: 5px solid #fff;\n    outline: none;\n    min-width: 338px;\n  }\n  & > button {\n    display: none;\n  }\n"], ["\n  margin-top: 60px;\n  text-align: center;\n  & > input {\n    color: white;\n    background-color: transparent;\n    border: none;\n    border-bottom: 5px solid #fff;\n    outline: none;\n    min-width: 338px;\n  }\n  & > button {\n    display: none;\n  }\n"])));
-var MovieMessage = styled_components_1.default.p(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  color: #fff;\n  font-size: 3rem;\n"], ["\n  color: #fff;\n  font-size: 3rem;\n"])));
+var SearchBookForm = styled_components_1.default.form(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  margin-top: 60px;\n  text-align: center;\n  & > input {\n    color: white;\n    background-color: transparent;\n    border: none;\n    border-bottom: 5px solid #fff;\n    outline: none;\n    min-width: 338px;\n  }\n  & > button {\n    display: none;\n  }\n"], ["\n  margin-top: 60px;\n  text-align: center;\n  & > input {\n    color: white;\n    background-color: transparent;\n    border: none;\n    border-bottom: 5px solid #fff;\n    outline: none;\n    min-width: 338px;\n  }\n  & > button {\n    display: none;\n  }\n"])));
+var BookMessage = styled_components_1.default.p(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  color: #fff;\n  font-size: 3rem;\n"], ["\n  color: #fff;\n  font-size: 3rem;\n"])));
 var App = function () {
     var _a = react_1.useState(null), items = _a[0], setItems = _a[1];
     var _b = react_1.useState(""), query = _b[0], setQuery = _b[1];
@@ -90,7 +90,7 @@ var App = function () {
                 case 1:
                     _a.trys.push([1, 3, , 4]);
                     setLoading(true);
-                    return [4 /*yield*/, Movie_1.getMovieList(query, display)];
+                    return [4 /*yield*/, Book_1.getBookList(query, display)];
                 case 2:
                     data = (_a.sent()).data.items;
                     setItems(data);
@@ -140,10 +140,10 @@ var App = function () {
         };
     }, [items, getData, display]);
     return (react_1.default.createElement(Wrapper, null,
-        react_1.default.createElement(SearchMovieForm, { onSubmit: getData },
+        react_1.default.createElement(SearchBookForm, { onSubmit: getData },
             react_1.default.createElement("input", { onChange: onInputChange, value: query }),
             react_1.default.createElement("button", { type: "submit" }, "\uAC80\uC0C9")),
-        items ? (react_1.default.createElement(MovieList_1.default, { items: items })) : (react_1.default.createElement(MovieMessage, null, "\uAC80\uC0C9\uC744 \uD574 \uC8FC\uC2ED\uC2DC\uC624"))));
+        items ? (react_1.default.createElement(BookList_1.default, { items: items })) : (react_1.default.createElement(BookMessage, null, "\uAC80\uC0C9\uC744 \uD574 \uC8FC\uC2ED\uC2DC\uC624"))));
 };
 exports.default = App;
 var templateObject_1, templateObject_2, templateObject_3;
