@@ -1,5 +1,5 @@
-# Movie-Search-App
-Naver 영화 검색 Open API를 사용하여 간단한 영화검색 웹앱을 만드는 프로젝트
+# Book-Search-App
+Naver 영화 검색 Open API를 사용하여 간단한 책검색 웹앱을 만드는 프로젝트
 
 # 주로 사용된 기술
 
@@ -10,7 +10,7 @@ React를 사용해서 Presentaion -> api 및 store -> Component 순으로 애플
 클래스형 컴포넌트가 아니라 함수형 컴포넌트들로 만들어 Hook을 적극적으로 활용했다.
 
 ### React.memo
-items만을 props로 받는 MovieList 컴포넌트는 React.memo로 감싸 App이 리렌더링되어도 items가 갱신되지 않았다면 리렌더링되지 않게 최적화하였다.
+items만을 props로 받는 BookList 컴포넌트는 React.memo로 감싸 App이 리렌더링되어도 items가 갱신되지 않았다면 리렌더링되지 않게 최적화하였다.
 
 ### useEffect
 무한 스크롤기능을 구현하기 위해 useEffect의 콜백함수와 반환함수에 각각 window의 scroll 이벤트에 대한 addEventListener와 removeEventListner를 사용했다.
