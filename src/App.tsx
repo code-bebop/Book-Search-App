@@ -60,7 +60,7 @@ const App = () => {
           data: { items: data },
         } = await getBookList(query, display);
         setItems(data);
-        setDisplay(display + 10);
+        setDisplay(prevState => prevState + 10);
         console.log(display);
         setLoading(false);
       } catch (e) {
@@ -94,6 +94,10 @@ const App = () => {
       : (document.documentElement || document.body)
           .scrollTop;
   };
+
+  useEffect(() => {
+    setDisplay(10);
+  }, [query]) 
 
   useEffect(() => {
     const scrollHandler = () => {

@@ -21,16 +21,13 @@ const BookList = ({ items }: BookListProps) => {
     return <ErrorMessage>검색 결과가 없습니다.</ErrorMessage>;
   }
   return (
-    <BookListBlock>
+    <BookListBlock onClickCapture={(e) => {console.log(e.target)}}>
       {items.map(
-        ({ title, image, price, author, pubdate }, i) => (
+        (item: object, i) => (
           <BookListItem
             key={i}
-            image={image}
-            title={title}
-            price={price}
-            author={author}
-            pubdate={pubdate}
+            item={item}
+            index={i}
           />
         )
       )}

@@ -17,41 +17,52 @@ const BookListItemBlock = styled.li`
       margin-right: 45px;
       flex: 2;
     }
-    & > div {
-      flex: 1;
-      & > h3 {
-        font-size: 42px;
-        margin-bottom: 30px;
+  }
+  & .Book__Info {
+    flex: 1;
+    & > h3 {
+      font-size: 42px;
+      margin-bottom: 30px;
+    }
+    & > dl {
+      & > dt,
+      & > dd {
+        font-size: 18px;
       }
-      & > dl {
-        & > dt,
-        & > dd {
-          font-size: 18px;
-        }
-        & > dt {
+      & > dt {
+        display: block;
+        float: left;
+        width: auto;
+        margin: 0 40px 25px 0;
+        font-weight: bold;
+      }
+      & > dd {
+        padding-left: 100px;
+        &:after {
+          content: "";
           display: block;
-          float: left;
-          width: auto;
-          margin: 0 40px 25px 0;
-          font-weight: bold;
-        }
-        & > dd {
-          padding-left: 100px;
-          &:after {
-            content: "";
-            display: block;
-            clear: both;
-          }
+          clear: both;
         }
       }
     }
+  }
+  & .Book__Button {
+    width: 150px;
+    height: 60px;
+    background-color: #fff;
+    align-self: flex-end;
+    border: none;
+    outline: none;
   }
   & + & {
     margin-top: 57px;
   }
 `;
 
-const BookListItem = ({ image, title, price, author, pubdate }) => {
+const BookListItem = ({ item, index }) => {
+  let { title, image, price, author, pubdate } = item;
+
+  title = title.replace(/<b>/gi, "").replace(/<\/b>/gi, "");
   return (
     <BookListItemBlock>
       <div className="Wrapper">
@@ -59,17 +70,20 @@ const BookListItem = ({ image, title, price, author, pubdate }) => {
           src={image}
           alt={title.replace(/<b>/gi, "").replace(/<\/b>/gi, "")}
         />
-        <div>
-          <h3>{title.replace(/<b>/gi, "").replace(/<\/b>/gi, "")}</h3>
+        <div className="Book__Info">
+          <h3>{title.length > 20 ? `${title.substr(0, 20)}...` : title}</h3>
           <dl>
             <dt>정가</dt>
             <dd>{price}</dd>
             <dt>저자</dt>
-            <dd>{author}</dd>
+            <dd>{author.replace(/<b>/gi, "").replace(/<\/b>/gi, "")}</dd>
             <dt>출간일</dt>
             <dd>{pubdate}</dd>
           </dl>
         </div>
+        <button className="Book__Button" id={index}>
+          이 작품을 추천
+        </button>
       </div>
     </BookListItemBlock>
   );

@@ -6,6 +6,8 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^14.14.6",
     "@types/react": "^16.9.55",
     "@types/react-dom": "^16.9.9",
     "@types/styled-components": "^5.1.4",
@@ -18,7 +20,7 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "tsc-watch --onSuccess \" react-scripts start\"",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
