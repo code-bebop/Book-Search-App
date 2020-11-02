@@ -53,6 +53,7 @@ const BookListItemBlock = styled.li`
     align-self: flex-end;
     border: none;
     outline: none;
+    cursor: pointer;
   }
   & + & {
     margin-top: 57px;

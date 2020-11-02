@@ -21,7 +21,11 @@ const BookList = ({ items }: BookListProps) => {
     return <ErrorMessage>검색 결과가 없습니다.</ErrorMessage>;
   }
   return (
-    <BookListBlock onClickCapture={(e) => {console.log(e.target)}}>
+    <BookListBlock onClickCapture={(e: React.MouseEvent<HTMLUListElement, MouseEvent>) => {
+      const id = e.target["id"];
+      if(!id) return;
+      console.log(`클릭된 버튼의 id값: ${items[id].title}`);
+    }}>
       {items.map(
         (item: object, i) => (
           <BookListItem
