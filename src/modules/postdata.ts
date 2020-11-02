@@ -5,7 +5,14 @@ const SAVE_POST = "postData/SAVE_POST";
 // export const savePost = createAction(SAVE_POST, (action) => {
 //     return (item: object) => action({ item: item });
 // })
-export const savePost = createAction(SAVE_POST, (item: object) => ({ item: item }))();
+type ItemType = {
+    title: string,
+    image: string,
+    price: string,
+    author: string,
+    pubdate: string
+}
+export const savePost = createAction(SAVE_POST, (item: ItemType) => ({ item: item }))();
 
 type postDataState = {
     item: object|null;
