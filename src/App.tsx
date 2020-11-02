@@ -43,7 +43,7 @@ const App = () => {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [display, setDisplay] = useState(10);
-
+ 
   const getData = useCallback(
     async (e?: React.FormEvent<HTMLFormElement>) => {
       if (e) {
