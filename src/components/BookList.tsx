@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+
 import BookListItem from "./BookListItem";
 
 const BookListBlock = styled.ul`
@@ -15,8 +16,15 @@ type BookListProps = {
   items: any[];
 }
 
+type ItemType = {
+    title: string,
+    image: string,
+    price: string,
+    author: string,
+    pubdate: string
+}
+
 const BookList = ({ items }: BookListProps) => {
-  console.log(items);
   if (items.length === 0) {
     return <ErrorMessage>검색 결과가 없습니다.</ErrorMessage>;
   }
@@ -24,10 +32,10 @@ const BookList = ({ items }: BookListProps) => {
     <BookListBlock onClickCapture={(e: React.MouseEvent<HTMLUListElement, MouseEvent>) => {
       const id = e.target["id"];
       if(!id) return;
-      console.log(`클릭된 버튼의 id값: ${items[id].title}`);
+      console.log(`클릭된 버튼의 제목: ${items[id].title}`);
     }}>
       {items.map(
-        (item: object, i) => (
+        (item: ItemType, i: number) => (
           <BookListItem
             key={i}
             item={item}

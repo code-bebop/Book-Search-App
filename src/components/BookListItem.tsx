@@ -60,7 +60,18 @@ const BookListItemBlock = styled.li`
   }
 `;
 
-const BookListItem = ({ item, index }) => {
+type BookListItemProps = {
+  item: {
+    title: string,
+    image: string,
+    price: string,
+    author: string,
+    pubdate: string
+  },
+  index: number
+}
+
+const BookListItem = ({ item, index }: BookListItemProps) => {
   let { title, image, price, author, pubdate } = item;
 
   title = title.replace(/<b>/gi, "").replace(/<\/b>/gi, "");
@@ -82,7 +93,7 @@ const BookListItem = ({ item, index }) => {
             <dd>{pubdate}</dd>
           </dl>
         </div>
-        <button className="Book__Button" id={index}>
+        <button className="Book__Button" id={index.toString()}>
           이 작품을 추천
         </button>
       </div>
