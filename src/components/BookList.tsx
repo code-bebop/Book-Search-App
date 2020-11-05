@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../modules";
 import { savePost } from "../modules/postdata";
+import { useHistory } from 'react-router-dom';
 
 import BookListItem from "./BookListItem";
 
@@ -15,7 +16,7 @@ const ErrorMessage = styled.p`
 `;
 
 type BookListProps = {
-  items: any[];
+  items: any[]
 }
 
 type ItemType = {
@@ -29,6 +30,7 @@ type ItemType = {
 const BookList = ({ items }: BookListProps) => {
   const item = useSelector((state: RootState) => ( state.postData.item ));
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const onSavePost = (item: ItemType) => {
     dispatch(savePost(item));
@@ -43,6 +45,7 @@ const BookList = ({ items }: BookListProps) => {
       if(!id) return;
       console.log(`클릭된 버튼의 제목: ${items[id].title}`);
       onSavePost(items[id]);
+      history.push("/BookWrite");
     }}>
       {items.map(
         (item: ItemType, i: number) => (

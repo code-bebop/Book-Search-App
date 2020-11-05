@@ -15,7 +15,7 @@ type ItemType = {
 export const savePost = createAction(SAVE_POST, (item: ItemType) => ({ item: item }))();
 
 type postDataState = {
-    item: object|null;
+    item: ItemType|null;
 }
 const initialState: postDataState = {
     item: null

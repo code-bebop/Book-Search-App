@@ -75,12 +75,13 @@ const BookListItem = ({ item, index }: BookListItemProps) => {
   let { title, image, price, author, pubdate } = item;
 
   title = title.replace(/<b>/gi, "").replace(/<\/b>/gi, "");
+  author = author.replace(/<b>/gi, "").replace(/<\/b>/gi, "");
   return (
     <BookListItemBlock>
       <div className="Wrapper">
         <img
           src={image}
-          alt={title.replace(/<b>/gi, "").replace(/<\/b>/gi, "")}
+          alt={title}
         />
         <div className="Book__Info">
           <h3>{title.length > 20 ? `${title.substr(0, 20)}...` : title}</h3>
@@ -88,7 +89,7 @@ const BookListItem = ({ item, index }: BookListItemProps) => {
             <dt>정가</dt>
             <dd>{price}</dd>
             <dt>저자</dt>
-            <dd>{author.replace(/<b>/gi, "").replace(/<\/b>/gi, "")}</dd>
+            <dd>{author}</dd>
             <dt>출간일</dt>
             <dd>{pubdate}</dd>
           </dl>
