@@ -3,19 +3,7 @@ import styled from "styled-components";
 
 import BookList from "../components/BookList";
 import { getBookList } from "../lib/api/Book";
-
-const Wrapper = styled.div`
-  width: 1024px;
-  margin: 0 auto;
-
-  @media (max-width: 1024px) {
-    width: 768px;
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`;
+import Responsive from '../components/common/Responsive';
 
 const SearchBookForm = styled.form`
   margin-top: 60px;
@@ -121,7 +109,7 @@ const BookSearchPage = () => {
   }, [items, getData, display]);
 
   return (
-    <Wrapper>
+    <Responsive>
       <SearchBookForm onSubmit={getData}>
         <input onChange={onInputChange} value={query} />
         <button type="submit">검색</button>
@@ -131,7 +119,7 @@ const BookSearchPage = () => {
       ) : (
         <BookMessage>검색을 해 주십시오</BookMessage>
       )}
-    </Wrapper>
+    </Responsive>
   );
 };
 

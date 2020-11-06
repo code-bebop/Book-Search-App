@@ -1,4 +1,7 @@
 import React from 'react';
+import styled from 'styled-components';
+
+import Responsive from './common/Responsive';
 
 type BookWriteProp = {
     post: {
@@ -17,13 +20,15 @@ const BookWrite = ({ post }: BookWriteProp) => {
     author = author.replace(/<b>/gi, "").replace(/<\/b>/gi, "");
         
     return (
-        <ul>
-            <li>{title}</li>
-            <li>{image}</li>
-            <li>{price}</li>
-            <li>{author}</li>;
-            <li>{pubdate}</li>
-        </ul>
+        <Responsive>
+            <ul>
+                <li>{title}</li>
+                <li>{image}</li>
+                <li>{price}</li>
+                <li>{author}</li>;
+                <li>{pubdate}</li>
+            </ul>
+        </Responsive>
     );
 }
 
