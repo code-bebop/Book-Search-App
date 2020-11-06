@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ResponsiveBlock = styled.div`
+export const ResponsiveBlock = styled.div`
   width: 1194px;
   margin: 0 auto;
 

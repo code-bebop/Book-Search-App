@@ -1,9 +1,47 @@
 import React, { useEffect, useRef } from 'react';
-// import styled from 'styled-components';
+import styled from 'styled-components';
 import Quill from 'quill';
 import 'quill/dist/quill.bubble.css';
 
-import Responsive from './common/Responsive';
+import { ResponsiveBlock } from './common/Responsive';
+
+const BookInfoList = styled.ul`
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    width: 262px;
+    background-color: #000;
+    color: #fff;
+    font-family: "DungGeunMo";
+    padding: 10px;
+    & > li {
+        &:nth-child(n+2) {
+            margin-top: 5px;
+        }
+    }
+`;
+
+const BookWriteResponsiveBlock = styled(ResponsiveBlock)`
+    background-color: #000;
+    color: #fff;
+`;
+
+const QuillWrapper = styled.div`
+    font-family: "DungGeunMo";
+    & > .ql-container {
+        background-color: inherit;
+        color: inherit;
+        font-family: inherit;
+        font-size: 18px;
+        /* 글쓰기 내용 크기 조정 */
+        & > .ql-editor {
+            height: 969px;
+        }
+        &::before {
+            color: inherit;
+        }
+    }
+`;
 
 type BookWriteProp = {
     post: {
@@ -27,7 +65,7 @@ const BookWrite = ({ post }: BookWriteProp) => {
         if (quillElement.current) {
             quillInstance.current = new Quill(quillElement.current, {
                 theme: "bubble",
-                placeholder: "여기에 내용을 입력",
+                placeholder: "[ 여기에 내용을 입력 ]",
                 modules: {
                     toolbar: [
                       [{ header: '1' }, { header: '2' }],
@@ -41,16 +79,17 @@ const BookWrite = ({ post }: BookWriteProp) => {
     }, []);
 
     return (
-        <Responsive>
-            <ul style={{color: "white"}}>
-                <li>{title}</li>
-                <li>{image}</li>
-                <li>{price}</li>
-                <li>{author}</li>
-                <li>{pubdate}</li>
-            </ul>
-            <div ref={quillElement} style={{color: "white"}}></div>
-        </Responsive>
+        <BookWriteResponsiveBlock>
+            <BookInfoList>
+                <li>제목: {title}</li>
+                <li>가격: {price}원</li>
+                <li>저자: {author}</li>
+                <li>발행일: {pubdate}</li>
+            </BookInfoList>
+            <QuillWrapper>
+                <div ref={quillElement}></div>
+            </QuillWrapper>
+        </BookWriteResponsiveBlock>
     );
 }
 
