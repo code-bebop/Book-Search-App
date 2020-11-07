@@ -9,21 +9,20 @@ const SearchBookForm = styled.form`
   margin-top: 60px;
   text-align: center;
   & > input {
+    font-size: 48px;
+    font-weight: bold;
     color: white;
+    text-align: center;
+    padding-bottom: 18px;
     background-color: transparent;
     border: none;
-    border-bottom: 5px solid #fff;
+    border-bottom: 5px solid #3B3BC4;
     outline: none;
     min-width: 338px;
   }
   & > button {
     display: none;
   }
-`;
-
-const BookMessage = styled.p`
-  color: #fff;
-  font-size: 3rem;
 `;
 
 const BookSearchPage = () => {
@@ -111,14 +110,10 @@ const BookSearchPage = () => {
   return (
     <Responsive>
       <SearchBookForm onSubmit={getData}>
-        <input onChange={onInputChange} value={query} />
+        <input onChange={onInputChange} value={query} placeholder="여기에 검색어 입력" />
         <button type="submit">검색</button>
       </SearchBookForm>
-      {items ? (
-        <BookList items={items} />
-      ) : (
-        <BookMessage>검색을 해 주십시오</BookMessage>
-      )}
+      {items && <BookList items={items} />}
     </Responsive>
   );
 };

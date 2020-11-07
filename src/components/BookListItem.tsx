@@ -3,11 +3,13 @@ import styled from "styled-components";
 
 const BookListItemBlock = styled.li`
   color: #fff;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 1px solid #fff;
   width: 100%;
   height: 450px;
   margin-top: 41px;
   padding: 45px 45px;
+  backdrop-filter: blur(7px);
   & .Wrapper {
     position: relative;
     display: flex;
@@ -22,7 +24,7 @@ const BookListItemBlock = styled.li`
     flex: 1;
     & > h3 {
       font-size: 42px;
-      margin-bottom: 30px;
+      margin-bottom: 45px;
     }
     & > dl {
       & > dt,
@@ -33,7 +35,7 @@ const BookListItemBlock = styled.li`
         display: block;
         float: left;
         width: auto;
-        margin: 0 40px 25px 0;
+        margin: 0 40px 42px 0;
         font-weight: bold;
       }
       & > dd {
@@ -49,7 +51,9 @@ const BookListItemBlock = styled.li`
   & .Book__Button {
     width: 150px;
     height: 60px;
-    background-color: #fff;
+    background-color: #191970;
+    color: #fff;
+    font-size: 16px;
     align-self: flex-end;
     border: none;
     outline: none;

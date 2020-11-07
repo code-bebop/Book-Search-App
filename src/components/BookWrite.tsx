@@ -10,7 +10,7 @@ const BookInfoList = styled.ul`
     top: 50px;
     right: 50px;
     width: 262px;
-    background-color: #000;
+    background-color: #0F0F10;
     color: #fff;
     font-family: "DungGeunMo";
     padding: 10px;
@@ -22,8 +22,23 @@ const BookInfoList = styled.ul`
 `;
 
 const BookWriteResponsiveBlock = styled(ResponsiveBlock)`
-    background-color: #000;
+    background-color: #0F0F10;
     color: #fff;
+    padding: 0 73px;
+`;
+
+const TitleInput = styled.input`
+    height: 240px;
+    width: 100%;
+    outline: none;
+    margin-bottom: 70px;
+    padding-left: 15px;
+    border: none;
+    border-bottom: 1px dashed #FFFFFF;
+    background-color: #0F0F10;
+    color: #fff;
+    font-size: 48px;
+    font-weight: 700;
 `;
 
 const QuillWrapper = styled.div`
@@ -36,9 +51,9 @@ const QuillWrapper = styled.div`
         /* 글쓰기 내용 크기 조정 */
         & > .ql-editor {
             height: 969px;
-        }
-        &::before {
-            color: inherit;
+            &::before {
+                color: #757575;
+            }
         }
     }
 `;
@@ -54,7 +69,7 @@ type BookWriteProp = {
 }
 
 const BookWrite = ({ post }: BookWriteProp) => {
-    let { title, image, price, author, pubdate } = post;
+    let { title, price, author, pubdate } = post;
     title = title.replace(/<b>/gi, "").replace(/<\/b>/gi, "");
     author = author.replace(/<b>/gi, "").replace(/<\/b>/gi, "");
 
@@ -65,7 +80,7 @@ const BookWrite = ({ post }: BookWriteProp) => {
         if (quillElement.current) {
             quillInstance.current = new Quill(quillElement.current, {
                 theme: "bubble",
-                placeholder: "[ 여기에 내용을 입력 ]",
+                placeholder: "[ 여기에 내용 입력 ]",
                 modules: {
                     toolbar: [
                       [{ header: '1' }, { header: '2' }],
@@ -86,6 +101,7 @@ const BookWrite = ({ post }: BookWriteProp) => {
                 <li>저자: {author}</li>
                 <li>발행일: {pubdate}</li>
             </BookInfoList>
+            <TitleInput placeholder="[ 여기에 제목 입력 ]" />
             <QuillWrapper>
                 <div ref={quillElement}></div>
             </QuillWrapper>
