@@ -1,9 +1,16 @@
 import { combineReducers } from "redux";
-import postData from "./postdata";
+import { all } from "redux-saga/effects";
+import bookData from "./bookData";
+import write, { writeSaga } from "./write";
 
 const rootReducer = combineReducers({
-    postData
+    bookData,
+    write
 });
+
+export function* rootSaga() {
+    yield all([writeSaga()])
+}
 
 export default rootReducer;
 

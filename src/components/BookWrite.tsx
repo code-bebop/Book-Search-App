@@ -65,10 +65,11 @@ type BookWriteProp = {
         price: string,
         author: string,
         pubdate: string
-    }
+    },
+    onWrite: (title: string, body: string) => void
 }
 
-const BookWrite = ({ post }: BookWriteProp) => {
+const BookWrite = ({ post, onWrite }: BookWriteProp) => {
     let { title, price, author, pubdate } = post;
     title = title.replace(/<b>/gi, "").replace(/<\/b>/gi, "");
     author = author.replace(/<b>/gi, "").replace(/<\/b>/gi, "");
@@ -105,6 +106,7 @@ const BookWrite = ({ post }: BookWriteProp) => {
             <QuillWrapper>
                 <div ref={quillElement}></div>
             </QuillWrapper>
+            <button onClick={() => onWrite("제목", "내용")}>글 쓰기</button>
         </BookWriteResponsiveBlock>
     );
 }

@@ -1,6 +1,7 @@
 import { createAction, ActionType, createReducer } from "typesafe-actions";
 
-const SAVE_POST = "postData/SAVE_POST";
+const SAVE_BOOK = "bookData/SAVE_BOOK";
+
 
 // export const savePost = createAction(SAVE_POST, (action) => {
 //     return (item: object) => action({ item: item });
@@ -12,20 +13,20 @@ type ItemType = {
     author: string,
     pubdate: string
 }
-export const savePost = createAction(SAVE_POST, (item: ItemType) => ({ item: item }))();
+export const savePost = createAction(SAVE_BOOK, (item: ItemType) => ({ item: item }))();
 
-type postDataState = {
+type bookDataState = {
     item: ItemType|null;
 }
-const initialState: postDataState = {
+const initialState: bookDataState = {
     item: null
 }
 
 const actions = { savePost };
-type postDataActions = ActionType<typeof actions>;
+type bookDataActions = ActionType<typeof actions>;
 
-const postData = createReducer<postDataState, postDataActions>(initialState, {
-    [SAVE_POST]: (state, {payload: {item}}) => ({ item })
+const bookData = createReducer<bookDataState, bookDataActions>(initialState, {
+    [SAVE_BOOK]: (state, {payload: {item}}) => ({ item })
 })
 
-export default postData;
+export default bookData;

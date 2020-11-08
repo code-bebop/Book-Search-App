@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../modules";
-import { savePost } from "../modules/postdata";
+import { savePost } from "../modules/bookData";
 import { useHistory } from 'react-router-dom';
 
 import BookListItem from "./BookListItem";
@@ -28,7 +28,7 @@ type ItemType = {
 }
 
 const BookList = ({ items }: BookListProps) => {
-  const item = useSelector((state: RootState) => ( state.postData.item ));
+  const item = useSelector((state: RootState) => ( state.bookData.item ));
   const dispatch = useDispatch();
   const history = useHistory();
 
