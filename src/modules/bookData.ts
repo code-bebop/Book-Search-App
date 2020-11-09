@@ -8,7 +8,6 @@ const SAVE_BOOK = "bookData/SAVE_BOOK";
 // })
 type ItemType = {
     title: string,
-    image: string,
     price: string,
     author: string,
     pubdate: string

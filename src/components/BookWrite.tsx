@@ -59,27 +59,30 @@ const QuillWrapper = styled.div`
 `;
 
 type BookWriteProp = {
-    post: {
+    bookData: {
         title: string,
-        image: string,
         price: string,
         author: string,
         pubdate: string
     },
-    onWrite: (title: string, body: string) => void
+    post: {
+        title: string,
+        body: string
+    }
+    onWrite: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+    onChange: ({ key, value }) => void
 }
 
-const BookWrite = ({ post, onWrite }: BookWriteProp) => {
-    let { title, price, author, pubdate } = post;
-    title = title.replace(/<b>/gi, "").replace(/<\/b>/gi, "");
+const BookWrite = ({ bookData, post, onWrite, onChange }: BookWriteProp) => {
+    let { title: bookDataTitle, price, author, pubdate } = bookData;
+    bookDataTitle = bookDataTitle.replace(/<b>/gi, "").replace(/<\/b>/gi, "");
     author = author.replace(/<b>/gi, "").replace(/<\/b>/gi, "");
 
     const quillElement = useRef<HTMLDivElement>(null);
-    const quillInstance = useRef(null);
 
     useEffect(() => {
         if (quillElement.current) {
-            quillInstance.current = new Quill(quillElement.current, {
+            const quill = new Quill(quillElement.current, {
                 theme: "bubble",
                 placeholder: "[ 여기에 내용 입력 ]",
                 modules: {
@@ -91,22 +94,32 @@ const BookWrite = ({ post, onWrite }: BookWriteProp) => {
                     ],
                   },
             });
+            console.log(quill);
+            quill.on("text-change", (delta, oldDelta, source) => {
+                if(source === "user") {
+                    onChange({ key: "body", value: quill.root.innerHTML});
+                }
+            });
         }
-    }, []);
+    }, [onChange]);
 
     return (
         <BookWriteResponsiveBlock>
             <BookInfoList>
-                <li>제목: {title}</li>
+                <li>제목: {bookDataTitle}</li>
                 <li>가격: {price}원</li>
                 <li>저자: {author}</li>
                 <li>발행일: {pubdate}</li>
             </BookInfoList>
-            <TitleInput placeholder="[ 여기에 제목 입력 ]" />
+            <TitleInput
+                placeholder="[ 여기에 제목 입력 ]"
+                value={post.title} 
+                onChange={(e) => onChange({ key: "title", value: e.target.value})}
+            />
             <QuillWrapper>
                 <div ref={quillElement}></div>
             </QuillWrapper>
-            <button onClick={() => onWrite("제목", "내용")}>글 쓰기</button>
+            <button onClick={onWrite}>글 쓰기</button>
         </BookWriteResponsiveBlock>
     );
 }

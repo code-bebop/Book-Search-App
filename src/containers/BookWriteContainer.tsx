@@ -1,22 +1,29 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from "../modules";
 
-import { writeAsync } from "../modules/write";
+import { writeAsync, changeField } from "../modules/write";
 
 import BookWrite from '../components/BookWrite';
 
 const BookWriteContainer = () => {
-    const post = useSelector((state: RootState) => ( state.bookData.item ));
+    const { bookData, post } = useSelector((state: RootState) => ({
+         bookData: state.bookData.item,
+         post: state.write.post
+    }));
     const dispatch = useDispatch();
 
-    const onWrite = (title: string, body: string) => {
-        const post = { title, body };
+    const onWrite = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
         dispatch(writeAsync.request(post));
-    }
+    }, [dispatch, post])
+    const onChange = useCallback((payload) => {
+        dispatch(changeField(payload));
+    }, [dispatch]);
+
     return (
         <>
-            {post ? (<BookWrite post={post} onWrite={onWrite} />) : (<p>포스트가 없습니다.</p>)}
+            {bookData ? (<BookWrite bookData={bookData} post={post} onWrite={onWrite} onChange={onChange} />) : (<p>포스트가 없습니다.</p>)}
         </>
     );
 }

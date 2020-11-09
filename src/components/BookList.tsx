@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../modules";
+import { useDispatch } from "react-redux";
 import { savePost } from "../modules/bookData";
 import { useHistory } from 'react-router-dom';
 
@@ -28,7 +27,6 @@ type ItemType = {
 }
 
 const BookList = ({ items }: BookListProps) => {
-  const item = useSelector((state: RootState) => ( state.bookData.item ));
   const dispatch = useDispatch();
   const history = useHistory();
 

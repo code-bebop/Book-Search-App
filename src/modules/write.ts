@@ -1,9 +1,14 @@
 import { AxiosError } from "axios";
-import { ActionType, createAsyncAction, createReducer } from "typesafe-actions";
+import { ActionType, createAction, createAsyncAction, createReducer } from "typesafe-actions";
 import { call, put, takeLatest } from "redux-saga/effects";
-import axios from "axios";
 
 import { writePost, writePostArg } from "../lib/api/posts";
+
+const INITIALIZE = "write/INITIALIZE";
+const CHANGE_FIELD = "write/CHANGE_FIELD";
+
+export const initialize = createAction(INITIALIZE)();
+export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({ key, value }))();
 
 const WRITE_REQUEST = "write/WRITE_REQUEST";
 const WRITE_SUCCESS = "write/WRITE_SUCCESS";
@@ -18,16 +23,8 @@ export const writeAsync = createAsyncAction(
 function* writePostSaga(action) {
     const { success, failure } = writeAsync;
 
-    type writePostArg = {
-        title: string,
-        body: string
-    }
-
     try {
-        const response = yield call(({ title, body }: writePostArg) => {
-            return axios.post("/api/posts", { title, body })
-        }, action.payload);
-        console.log(response);
+        yield call(writePost, action.payload);
         yield put(success());
     } catch (e) {
         yield put(failure(e));
@@ -38,23 +35,39 @@ export const writeSaga = function*() {
 }
 
 const actions = {
+    initialize,
+    changeField,
     writeAsync
 }
 
 type writeActions = ActionType<typeof actions>;
 type writeState = {
-    response: string,
+    post: {
+        title: string,
+        body: string
+    },
     loading: boolean
     error: Error | null
 }
 
 const initialState = {
+    post: {
+        title: '',
+        body: ''
+    },
     loading: false,
     error: null,
-    response: ''
 }
 
 const write = createReducer<writeState, writeActions>(initialState, {
+    [INITIALIZE]: (state) => initialState,
+    [CHANGE_FIELD]: (state, { payload: { key, value } } ) => ({
+        ...state,
+        post: {
+            ...state.post,
+            [key]: value
+        }
+    }),
     [WRITE_REQUEST]: (state) => ({
         ...state,
         loading: true,
