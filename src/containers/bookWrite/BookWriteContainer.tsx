@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from "../modules";
+import { RootState } from "../../modules";
 
-import { writeAsync, changeField } from "../modules/write";
+import { writeAsync, changeField } from "../../modules/write";
 
-import BookWrite from '../components/BookWrite';
+import BookWrite from '../../components/bookWrite/BookWrite';
 
 const BookWriteContainer = () => {
     const { bookData, post } = useSelector((state: RootState) => ({

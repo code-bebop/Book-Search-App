@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { savePost } from "../modules/bookData";
+import { saveBook } from "../../modules/bookData";
 import { useHistory } from 'react-router-dom';
 
 import BookListItem from "./BookListItem";
@@ -15,7 +15,7 @@ const ErrorMessage = styled.p`
 `;
 
 type BookListProps = {
-  items: any[]
+  items: Array<any>
 }
 
 type ItemType = {
@@ -30,8 +30,8 @@ const BookList = ({ items }: BookListProps) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const onSavePost = (item: ItemType) => {
-    dispatch(savePost(item));
+  const onSaveBook = (item: ItemType) => {
+    dispatch(saveBook(item));
   };
 
   if (items.length === 0) {
@@ -42,7 +42,7 @@ const BookList = ({ items }: BookListProps) => {
       const id = e.target["id"];
       if(!id) return;
       console.log(`클릭된 버튼의 제목: ${items[id].title}`);
-      onSavePost(items[id]);
+      onSaveBook(items[id]);
       history.push("/BookWrite");
     }}>
       {items.map(

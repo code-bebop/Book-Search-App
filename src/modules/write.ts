@@ -3,7 +3,7 @@ import { ActionType, createAction, createAsyncAction, createReducer } from "type
 import { takeLatest } from "redux-saga/effects";
 
 import createAsyncSaga, { createAsyncActionType } from "../lib/createAsyncSaga";
-import { writePost, writePostArg } from "../lib/api/posts";
+import { writePost, writePostP } from "../lib/api/posts";
 
 const INITIALIZE = "write/INITIALIZE";
 const CHANGE_FIELD = "write/CHANGE_FIELD";
@@ -17,9 +17,9 @@ export const writeAsync = createAsyncAction(
     REQUEST,
     SUCCESS,
     FAILURE
-)<writePostArg, AxiosResponse, AxiosError>();
+)<writePostP, AxiosResponse, AxiosError>();
 
-const writePostSaga = createAsyncSaga<writePostArg, AxiosResponse, AxiosError>(writeAsync, writePost);
+const writePostSaga = createAsyncSaga<writePostP, AxiosResponse, AxiosError>(writeAsync, writePost);
 
 export const writeSaga = function*() {
     yield takeLatest(REQUEST, writePostSaga);
@@ -51,7 +51,7 @@ const initialState = {
 
 const write = createReducer<writeState, writeActions>(initialState, {
     [INITIALIZE]: (state) => initialState,
-    [CHANGE_FIELD]: (state, { payload: { key, value} } ) => ({
+    [CHANGE_FIELD]: (state, { payload: { key, value} }) => ({
         ...state,
         post: {
             ...state.post,

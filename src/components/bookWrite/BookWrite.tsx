@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Quill from 'quill';
 import 'quill/dist/quill.bubble.css';
 
-import { ResponsiveBlock } from './common/Responsive';
+import { ResponsiveBlock } from '../common/Responsive';
 
 const BookInfoList = styled.ul`
     position: absolute;

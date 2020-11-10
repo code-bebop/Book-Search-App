@@ -3,7 +3,14 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const getBookList = async (query: string, display: number) =>
+export type getBookListP = {
+  query: string,
+  display: number
+}
+
+
+
+export const getBookList = async ({ query, display }: getBookListP) =>
   await axios.get(`/v1/search/book.json?query=${query}&display=${display}`, {
     headers: {
       "X-Naver-Client-Id": "VWn8d_Kescc7tCMaYjkx",
