@@ -28,7 +28,6 @@ const SearchBookForm = styled.form`
 const BookSearchPage = () => {
   const [items, setItems] = useState<any[] | null>(null);
   const [query, setQuery] = useState("");
-  const [loading, setLoading] = useState(false);
   const [display, setDisplay] = useState(10);
  
   const getData = useCallback(
@@ -42,17 +41,14 @@ const BookSearchPage = () => {
       }
 
       try {
-        setLoading(true);
         const {
           data: { items: data },
         } = await getBookList(query, display);
         setItems(data);
         setDisplay(prevState => prevState + 10);
         console.log(display);
-        setLoading(false);
       } catch (e) {
         console.log(e);
-        setLoading(false);
       }
     },
     [query, display]
