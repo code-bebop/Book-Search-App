@@ -3,15 +3,17 @@ import { all } from "redux-saga/effects";
 import bookData from "./bookData";
 import write, { writeSaga } from "./write";
 import bookList, { bookListSaga } from "./bookList";
+import post, { postSaga } from "./post";
 
 const rootReducer = combineReducers({
     bookData,
     write,
-    bookList
+    bookList,
+    post
 });
 
 export function* rootSaga() {
-    yield all([writeSaga(), bookListSaga()])
+    yield all([writeSaga(), bookListSaga(), postSaga()])
 }
 
 export default rootReducer;

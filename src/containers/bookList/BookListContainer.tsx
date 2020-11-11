@@ -25,7 +25,9 @@ const BookListContainer = () => {
     useScroll();
 
     return (
-        <BookList items={items} onClickCapture={onClickCapture} />
+        <>
+            { items ? <BookList items={items} onClickCapture={onClickCapture} /> : <></> }
+        </>
     )
 }
 

@@ -2,10 +2,6 @@ import { createAction, ActionType, createReducer } from "typesafe-actions";
 
 const SAVE_BOOK = "bookData/SAVE_BOOK";
 
-
-// export const savePost = createAction(SAVE_POST, (action) => {
-//     return (item: object) => action({ item: item });
-// })
 type ItemType = {
     title: string,
     price: string,

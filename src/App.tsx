@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import BookSearchPage from './pages/BookSearchPage';
 import BookWritePage from './pages/BookWritePage';
+import PostListPage from './pages/PostListPage';
 
 const LinkWrapper = styled.nav`
     position: fixed;
@@ -38,13 +39,14 @@ const App = () => {
                         <Link to="/BookSearch">책 검색하기</Link>
                     </li>
                     <li>
-                        <Link to="/BookWrite">이 책 추천하기</Link>
+                        <Link to="/PostList">추천 책 목록</Link>
                     </li>
                 </LinkList>
             </LinkWrapper>
             <Switch>
                 <Route path="/BookSearch" component={BookSearchPage} />
                 <Route path="/BookWrite" component={BookWritePage} />
+                <Route path="/PostList" component={PostListPage} />
                 <Redirect path="*" to="/BookSearch" />
             </Switch>
         </>
