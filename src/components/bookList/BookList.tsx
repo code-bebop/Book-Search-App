@@ -15,7 +15,8 @@ const ErrorMessage = styled.p`
 `;
 
 type BookListProps = {
-  items: Array<any>
+  items: Array<any>,
+  onClickCapture: (e: React.MouseEvent<HTMLUListElement, MouseEvent>) => void
 }
 
 type ItemType = {
@@ -26,25 +27,12 @@ type ItemType = {
     pubdate: string
 }
 
-const BookList = ({ items }: BookListProps) => {
-  const dispatch = useDispatch();
-  const history = useHistory();
-
-  const onSaveBook = (item: ItemType) => {
-    dispatch(saveBook(item));
-  };
-
+const BookList = ({ items, onClickCapture }: BookListProps) => {
   if (items.length === 0) {
     return <ErrorMessage>검색 결과가 없습니다.</ErrorMessage>;
   }
   return (
-    <BookListBlock onClickCapture={(e: React.MouseEvent<HTMLUListElement, MouseEvent>) => {
-      const id = e.target["id"];
-      if(!id) return;
-      console.log(`클릭된 버튼의 제목: ${items[id].title}`);
-      onSaveBook(items[id]);
-      history.push("/BookWrite");
-    }}>
+    <BookListBlock onClickCapture={onClickCapture}>
       {items.map(
         (item: ItemType, i: number) => (
           <BookListItem

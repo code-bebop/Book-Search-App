@@ -22,7 +22,7 @@ const BookListContainer = () => {
     }, [dispatch, history, items]);
 
     return (
-        <BookList items={items} />
+        <BookList items={items} onClickCapture={onClickCapture} />
     )
 }
 
