@@ -1,8 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
-import { saveBook } from "../../modules/bookData";
-import { useHistory } from 'react-router-dom';
 
 import BookListItem from "./BookListItem";
 
