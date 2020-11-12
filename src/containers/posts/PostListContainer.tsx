@@ -3,16 +3,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import PostList from '../../components/posts/PostList';
 import { RootState } from '../../modules';
 
-import { getPostAsync } from '../../modules/post';
+import { getPostsAsync } from '../../modules/posts';
 
 const PostListContainer = () => {
-    const { postList } = useSelector(({ post }: RootState) => ({
-        postList: post.postList
+    const { postList } = useSelector(({ posts }: RootState) => ({
+        postList: posts.postList
     }));
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getPostAsync.request());
+        dispatch(getPostsAsync.request());
     }, [dispatch])
 
     return (
