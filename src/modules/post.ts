@@ -19,13 +19,18 @@ export const postSaga = function*() {
     yield takeLatest(REQUEST, getPostSaga);
 }
 
-type postState = {
+// Post Component에서 props의 interface를 정의할 때 재사용 하려고 했는데
+// null을 union type으로 같이 지정하면 post의 property를 못 읽는다.
+export interface PostT {
     post: {
         _id: string,
         publishedDate: Date,
         title: string,
         body: string
-    } | null,
+    } | null
+}
+
+interface PostState extends PostT {
     loading: boolean,
     error: Error | null
 }
@@ -36,7 +41,7 @@ const initialState = {
     error: null
 }
 
-const post = createReducer<postState>(initialState, {
+const post = createReducer<PostState>(initialState, {
     [REQUEST]: (state) => ({
         ...state,
         loading: true
@@ -44,7 +49,7 @@ const post = createReducer<postState>(initialState, {
     [SUCCESS]: (state, { payload: post }) => ({
         ...state,
         loading: false,
-        postList: post.data
+        post: post.data[0]
     }),
     [FAILURE]: (state, { payload: error }) => ({
         ...state,

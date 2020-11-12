@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import BookSearchPage from './pages/BookSearchPage';
 import BookWritePage from './pages/BookWritePage';
 import PostListPage from './pages/PostListPage';
+import PostPage from './pages/PostPage';
 
 const LinkWrapper = styled.nav`
     position: fixed;
@@ -47,6 +48,7 @@ const App = () => {
                 <Route path="/BookSearch" component={BookSearchPage} />
                 <Route path="/BookWrite" component={BookWritePage} />
                 <Route path="/PostList" component={PostListPage} />
+                <Route path="/Post/:id" component={PostPage} />
                 <Redirect path="*" to="/BookSearch" />
             </Switch>
         </>
