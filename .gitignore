@@ -7,7 +7,7 @@
 /dist
 
 # production
-/build
+/dist
 
 # misc
 .env
