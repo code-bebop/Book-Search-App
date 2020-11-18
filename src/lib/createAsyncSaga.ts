@@ -48,6 +48,7 @@ function createAsyncSaga<P1, P2, P3> (
                 : yield call(promiseCreator);
             yield put(asyncActionCreator.success(response));
         } catch (e) {
+            console.log(e);
             yield put (asyncActionCreator.failure(e));
         }
     }

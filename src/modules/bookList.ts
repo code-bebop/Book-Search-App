@@ -51,13 +51,13 @@ const bookList = createReducer<bookListState, bookListActions>(initialState, {
     }),
     [REQUEST]: (state) => ({
         ...state,
-        loading: true,
-        display: state.display + 10
+        loading: true
     }),
     [SUCCESS]: (state, { payload: bookList }) => ({
         ...state,
         loading: false,
-        bookList: bookList.data.items
+        bookList: bookList.data.items,
+        display: state.display + 10
     }),
     [FAILURE]: (state, { payload: error }) => ({
         ...state,
