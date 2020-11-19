@@ -53,3 +53,46 @@ if (getScrollTop() >= getDocumentHeight() - window.innerHeight) {
 TypeScript에 대해 개념은 알고 있었으나 사용해본 적이 없어 한 번 적용해보았다.
 type을 제한하는 것에 대한 코드를 적용하는 것은 금방 했으나, tsconfig 설정과 compile에 필요한 라이브러리등을 찾아 받는 것이 오래걸렸다. CRA를 할 때에 typescript 옵션을 사용하면 뚝딱이지만, 처음에 TypeScript를 사용할 계획이 없었기 때문에 직접 설정하는 게 힘들었다.
 또한 개발환경 설정에 대한 부분은 하다보면 금방 익숙해질 것이라 생각했다.
+
+## Webpack
+Webpack또한 개념은 알고 있었으나 직접 사용하여 프로젝트를 build하는 것은 이 처음이었다. webpack.config.js 설정에 대해 배울 것이 너무 많아서 기피했다고 생각한다.
+그 우려는 어느 정도 맞았다. 하지만 배우고 나서 보니 굉장히 편한 라이브러리였고, 프론트엔드라면 반드시 알아야 하는 라이브러리였다.
+
+### API Key 은닉
+NAVER OPEN API의 Key를 어떻게 은닉해야 할지 고민하다가, webpack.config.js 에서 dotenv를 사용해서 환경변수를 불러와 webpack.DefinePlugin을 사용해 전역변수로 설정하기로 했다.
+
+```
+// .env
+
+NAVER_API_SECRET = "naver api key"
+
+
+// webpack.config.js
+
+require('dotenv').config();
+
+module.exports = {
+  ...
+  plugin: [
+    new webpack.DefinePlugin({
+      MY_API_KEY: JSON.stringify(process.env.MY_API_KEY)
+    })
+  ]
+  ...
+}
+
+
+// src/lib/api/Book.tsx
+
+import axios from 'axios';
+
+...
+export const getBookList = async ({ query, display }: getBookListP) =>
+  await axios.get(`/v1/search/book.json?query=${query}&display=${display}`, {
+    headers: {
+      "X-Naver-Client-Id": "VWn8d_Kescc7tCMaYjkx",
+      "X-Naver-Client-Secret": NAVER_API_SECRET,
+    },
+  });
+```
+그리고 .env 를 .gitignore에 추가함으로써 API Key를 은닉했다.
