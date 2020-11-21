@@ -33,16 +33,28 @@ export interface PostT {
 }
 
 interface PostState extends PostT {
-    nextPostId: string,
-    prevPostId: string,
+    nextPost: {
+        _id: string,
+        title: string
+    },
+    prevPost: {
+        _id: string,
+        title: string
+    },
     loading: boolean,
     error: Error | null
 }
 
 const initialState = {
     post: null,
-    nextPostId: '',
-    prevPostId: '',
+    nextPost: {
+        _id: '',
+        title: ''
+    },
+    prevPost: {
+        _id: '',
+        title: ''
+    },
     loading: false,
     error: null
 }
@@ -56,8 +68,8 @@ const post = createReducer<PostState>(initialState, {
         ...state,
         loading: false,
         post: res.post,
-        nextPostId: res.nextPostId[0]._id,
-        prevPostId: res.prevPostId[0]._id
+        nextPost: res.nextPost[0],
+        prevPost: res.prevPost[0]
 
     }),
     [FAILURE]: (state, { payload: error }) => ({
