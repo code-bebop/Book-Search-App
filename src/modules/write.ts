@@ -1,3 +1,5 @@
+// BookWritePage에서 작성한 Post를 DB에 저장하는 기능
+
 import { AxiosError, AxiosResponse } from "axios";
 import { ActionType, createAction, createAsyncAction, createReducer } from "typesafe-actions";
 import { takeLatest } from "redux-saga/effects";

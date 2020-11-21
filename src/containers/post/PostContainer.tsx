@@ -11,8 +11,10 @@ type PostParams = {
 }
 
 const PostContainer = () => {
-    const { post } = useSelector(({ post }: RootState) => ({
-        post: post.post
+    const { post, nextPostId, prevPostId } = useSelector(({ post }: RootState) => ({
+        post: post.post,
+        nextPostId: post.nextPostId,
+        prevPostId: post.prevPostId
     }));
     const dispatch = useDispatch();
     const { id }: PostParams = useParams();
@@ -21,9 +23,10 @@ const PostContainer = () => {
         dispatch(getPostAsync.request({ id }));
     }, [dispatch, id]);
 
+    console.log(post);
     return (
         <>
-            {post ? <Post post={post} /> : <p>해당 ID의 포스트가 없습니다.</p>}
+            {post ? <Post post={post} nextPostId={nextPostId} prevPostId={prevPostId} /> : <p>해당 ID의 포스트가 없습니다.</p>}
         </>
     )
 }

@@ -1,3 +1,5 @@
+// PostListPage에서 Post title을 클릭하면 해당 Post를 DB에서 불러오는 기능
+
 import { AxiosError, AxiosResponse } from "axios";
 import { createAsyncAction, createReducer } from "typesafe-actions";
 import { takeLatest } from "redux-saga/effects";
@@ -24,19 +26,23 @@ export const postSaga = function*() {
 export interface PostT {
     post: {
         _id: string,
-        publishedDate: Date,
+        publishedDate: string,
         title: string,
         body: string
     } | null
 }
 
 interface PostState extends PostT {
+    nextPostId: string,
+    prevPostId: string,
     loading: boolean,
     error: Error | null
 }
 
 const initialState = {
     post: null,
+    nextPostId: '',
+    prevPostId: '',
     loading: false,
     error: null
 }
@@ -46,10 +52,13 @@ const post = createReducer<PostState>(initialState, {
         ...state,
         loading: true
     }),
-    [SUCCESS]: (state, { payload: post }) => ({
+    [SUCCESS]: (state, { payload: { data: res } }) => ({
         ...state,
         loading: false,
-        post: post.data[0]
+        post: res.post,
+        nextPostId: res.nextPostId[0]._id,
+        prevPostId: res.prevPostId[0]._id
+
     }),
     [FAILURE]: (state, { payload: error }) => ({
         ...state,

@@ -1,3 +1,5 @@
+// BookSearchPage에서 검색했을 때 Naver API에서 검색어와 관련된 책을 읽어오는 기능
+
 import { AxiosError, AxiosResponse } from "axios";
 import { ActionType, createAction, createAsyncAction, createReducer } from "typesafe-actions";
 import { takeLatest } from "redux-saga/effects";

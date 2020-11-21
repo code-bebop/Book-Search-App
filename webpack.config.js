@@ -36,6 +36,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
+      title: '책 추천 게시판',
+      publicPath: '/',
     }),
     new CleanWebpackPlugin(),
     new webpack.DefinePlugin({
