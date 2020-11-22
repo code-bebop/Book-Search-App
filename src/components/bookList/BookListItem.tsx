@@ -14,41 +14,51 @@ const BookListItemBlock = styled.li`
     position: relative;
     display: flex;
     & > img {
-      max-width: 320px;
+      width: 265px;
       height: 360px;
       margin-right: 45px;
-      flex: 2;
     }
-  }
-  & .Book__Info {
-    flex: 1;
-    & > h3 {
-      font-size: 42px;
-      margin-bottom: 45px;
-    }
-    & > dl {
-      & > dt,
-      & > dd {
-        font-size: 18px;
+    & .Book__Info {
+      max-width: 38.36vw;
+      & > h3 {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        max-width: 38.36vw;
+        line-height: 1.5;
+        height: 3em;
+        -webkit-line-clamp: 2;
+        font-size: 36px;
+        margin-bottom: 45px;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
-      & > dt {
-        display: block;
-        float: left;
-        width: auto;
-        margin: 0 40px 42px 0;
-        font-weight: bold;
-      }
-      & > dd {
-        padding-left: 100px;
-        &:after {
-          content: "";
+      & > dl {
+        & > dt,
+        & > dd {
+          font-size: 18px;
+        }
+        & > dt {
           display: block;
-          clear: both;
+          float: left;
+          width: auto;
+          margin: 0 40px 42px 0;
+          font-weight: bold;
+        }
+        & > dd {
+          padding-left: 100px;
+          &:after {
+            content: "";
+            display: block;
+            clear: both;
+          }
         }
       }
     }
   }
   & .Book__Button {
+    position: absolute;
+    right: 0;
+    bottom: 0;
     width: 150px;
     height: 60px;
     background-color: #191970;
@@ -88,7 +98,7 @@ const BookListItem = ({ item, index }: BookListItemProps) => {
           alt={title}
         />
         <div className="Book__Info">
-          <h3>{title.length > 20 ? `${title.substr(0, 20)}...` : title}</h3>
+          <h3>{title}</h3>
           <dl>
             <dt>정가</dt>
             <dd>{price}</dd>
