@@ -40,6 +40,7 @@ const PostButtons = styled.div`
             &--right {
                 text-align: right;
                 justify-content: flex-end;
+                margin-left: auto;
             }
             &--left {
                 justify-content: flex-start;
@@ -50,7 +51,8 @@ const PostButtons = styled.div`
                 justify-content: center;
                 width: 100%;
                 height: 100%;
-                padding: 0 35px;               
+                padding: 0 35px;
+                user-select: none;
             }
             .Link_des {
                 font-size: 18px;
@@ -95,18 +97,18 @@ const Post = ({ post, nextPost, prevPost }: PostProps) => {
                 <p className="PostBlock_body">{body}</p>
             </PostContent>
             <PostButtons>
-                <div className="LinkContainer LinkContainer--left">
+                { nextPost ? <div className="LinkContainer LinkContainer--left">
                     <Link to={`/Post/${nextPost._id}`}>
                         <span className="Link_des">다음 포스트</span>
                         <h3 className="Link_title">{nextPost.title}</h3>
                     </Link>
-                </div>
-                <div className="LinkContainer LinkContainer--right">
+                </div> : <></> }
+                { prevPost ? <div className="LinkContainer LinkContainer--right">
                     <Link to={`/Post/${prevPost._id}`}>
                         <span className="Link_des">이전 포스트</span>
                         <h3 className="Link_title">{prevPost.title}</h3>
                     </Link>
-                </div>
+                </div> : <></> }
             </PostButtons>
         </PostBlock>
     )

@@ -1,8 +1,8 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from "../../modules";
 
-import { writeAsync, changeField } from "../../modules/write";
+import { writeAsync, changeField, initialize } from "../../modules/write";
 
 import BookWrite from '../../components/bookWrite/BookWrite';
 
@@ -21,6 +21,11 @@ const BookWriteContainer = () => {
         dispatch(changeField(payload));
     }, [dispatch]);
 
+    useEffect(() => {
+        return () => {
+            dispatch(initialize());
+        }
+    }, [dispatch])
     return (
         <>
             {bookData ? (<BookWrite bookData={bookData} post={post} onWrite={onWrite} onChange={onChange} />) : (<p>포스트가 없습니다.</p>)}
