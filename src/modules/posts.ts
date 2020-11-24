@@ -5,7 +5,7 @@ import { createAsyncAction, createReducer } from "typesafe-actions";
 import { takeLatest } from "redux-saga/effects";
 
 import createAsyncSaga, { createAsyncActionType } from "../lib/createAsyncSaga";
-import { getPosts } from "../lib/api/posts";
+import { getPosts, getPostsP } from "../lib/api/posts";
 
 const { REQUEST, SUCCESS, FAILURE } = createAsyncActionType("posts/FETCH");
 
@@ -13,9 +13,9 @@ export const getPostsAsync = createAsyncAction(
     REQUEST,
     SUCCESS,
     FAILURE
-)<undefined, AxiosResponse, AxiosError>();
+)<getPostsP, AxiosResponse, AxiosError>();
 
-const getPostsSaga = createAsyncSaga<undefined, AxiosResponse, AxiosError>(getPostsAsync, getPosts);
+const getPostsSaga = createAsyncSaga<getPostsP, AxiosResponse, AxiosError>(getPostsAsync, getPosts);
 
 export const postsSaga = function*() {
     yield takeLatest(REQUEST, getPostsSaga);
@@ -23,12 +23,14 @@ export const postsSaga = function*() {
 
 type postsState = {
     postList: Array<any>,
+    postCount: number,
     loading: boolean,
     error: Error | null
 }
 
 const initialState = {
     postList: [],
+    postCount: 0,
     loading: false,
     error: null
 }
@@ -38,10 +40,11 @@ const posts = createReducer<postsState>(initialState, {
         ...state,
         loading: true
     }),
-    [SUCCESS]: (state, { payload: postList }) => ({
+    [SUCCESS]: (state, { payload: res }) => ({
         ...state,
         loading: false,
-        postList: postList.data
+        postList: res.data.posts,
+        postCount: res.data.postCount
     }),
     [FAILURE]: (state, { payload: error }) => ({
         ...state,

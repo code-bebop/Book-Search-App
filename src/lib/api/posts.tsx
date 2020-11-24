@@ -1,7 +1,11 @@
 import axios from "axios";
 
-export const getPosts = async () => (
-    await axios.get("/api/posts")
+export type getPostsP = {
+    pageNumber: string
+}
+
+export const getPosts = async ({ pageNumber }) => (
+    await axios.get(`/api/posts?page=${pageNumber}`)
 );
 
 export type getPostP = {

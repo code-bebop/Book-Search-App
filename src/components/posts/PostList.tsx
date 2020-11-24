@@ -5,12 +5,15 @@ import { Link } from 'react-router-dom';
 const PostListBlock = styled.div`
     color: #fff;
     background-color: #0F0F10;
-    height: 100vh;
-    padding: 107px 95px 0 95px;
+    height: auto;
+    padding: 107px 95px;
     & > .board {
         display: flex;
         height: 90px;
         border-top: 1px solid #DDD;
+        &:last-child {
+            border-bottom: 1px solid #DDD;
+        }
         & > li {
             display: flex;
             align-items: center;

@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import { RootState } from "../../modules";
 
 import { writeAsync, changeField, initialize } from "../../modules/write";
@@ -12,11 +13,13 @@ const BookWriteContainer = () => {
          post: state.write.post
     }));
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const onWrite = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
         dispatch(writeAsync.request(post));
-    }, [dispatch, post])
+        history.push("/PostList");
+    }, [dispatch, post, history])
     const onChange = useCallback((payload) => {
         dispatch(changeField(payload));
     }, [dispatch]);

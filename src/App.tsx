@@ -40,7 +40,7 @@ const App = () => {
                         <Link to="/BookSearch">책 검색하기</Link>
                     </li>
                     <li>
-                        <Link to="/PostList">추천 책 목록</Link>
+                        <Link to="/PostList?page=1">추천 책 목록</Link>
                     </li>
                 </LinkList>
             </LinkWrapper>
