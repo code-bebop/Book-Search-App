@@ -9,7 +9,7 @@ import BookWrite from '../../components/bookWrite/BookWrite';
 
 const BookWriteContainer = () => {
     const { bookData, post } = useSelector((state: RootState) => ({
-         bookData: state.bookData.item,
+         bookData: state.bookData.bookData,
          post: state.write.post
     }));
     const dispatch = useDispatch();
@@ -17,12 +17,20 @@ const BookWriteContainer = () => {
 
     const onWrite = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
-        dispatch(writeAsync.request(post));
-        history.push("/PostList");
-    }, [dispatch, post, history])
+        const payload = {
+            title: post.title,
+            body: post.body,
+            bookInfo: bookData
+        }
+        dispatch(writeAsync.request(payload));
+        history.push("/PostList?page=1");
+    }, [dispatch, post, history, bookData])
     const onChange = useCallback((payload) => {
         dispatch(changeField(payload));
     }, [dispatch]);
+    const onCancle = useCallback(() => {
+        history.goBack();
+    }, [history])
 
     useEffect(() => {
         return () => {
@@ -31,7 +39,7 @@ const BookWriteContainer = () => {
     }, [dispatch])
     return (
         <>
-            {bookData ? (<BookWrite bookData={bookData} post={post} onWrite={onWrite} onChange={onChange} />) : (<p>포스트가 없습니다.</p>)}
+            {bookData ? (<BookWrite bookData={bookData} post={post} onWrite={onWrite} onChange={onChange} onCancle={onCancle} />) : (<p>포스트가 없습니다.</p>)}
         </>
     );
 }

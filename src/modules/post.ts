@@ -6,6 +6,7 @@ import { takeLatest } from "redux-saga/effects";
 
 import createAsyncSaga, { createAsyncActionType } from "../lib/createAsyncSaga";
 import { getPost, getPostP } from "../lib/api/posts";
+import { bookDataType } from "./bookData";
 
 const { REQUEST, SUCCESS, FAILURE } = createAsyncActionType("post/FETCH");
 
@@ -28,7 +29,8 @@ export interface PostT {
         _id: string,
         publishedDate: string,
         title: string,
-        body: string
+        body: string,
+        bookInfo: bookDataType
     } | null
 }
 

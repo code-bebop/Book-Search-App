@@ -5,26 +5,33 @@ import { createAction, ActionType, createReducer } from "typesafe-actions";
 
 const SAVE_BOOK = "bookData/SAVE_BOOK";
 
-type ItemType = {
+export type bookDataType = {
     title: string,
     price: string,
     author: string,
-    pubdate: string
+    publisher: string,
+    image: string
 }
-export const saveBook = createAction(SAVE_BOOK, (item: ItemType) => ({ item: item }))();
+export const saveBook = createAction(SAVE_BOOK, (item: bookDataType) => ({ bookData: item }))();
 
 type bookDataState = {
-    item: ItemType|null;
+    bookData: bookDataType;
 }
 const initialState: bookDataState = {
-    item: null
+    bookData: {
+        title: '',
+        price: '',
+        author: '',
+        publisher: '',
+        image: ''
+    }
 }
 
 const actions = { saveBook };
 type bookDataActions = ActionType<typeof actions>;
 
 const bookData = createReducer<bookDataState, bookDataActions>(initialState, {
-    [SAVE_BOOK]: (state, {payload: {item}}) => ({ item })
+    [SAVE_BOOK]: (state, {payload: { bookData }}) => ({ bookData })
 })
 
 export default bookData;

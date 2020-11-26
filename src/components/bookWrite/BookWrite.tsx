@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Quill from 'quill';
 import 'quill/dist/quill.bubble.css';
+import { bookDataType } from '../../modules/bookData';
 
 import { ResponsiveBlock } from '../common/Responsive';
 
@@ -48,7 +49,8 @@ const QuillWrapper = styled.div`
         color: inherit;
         font-family: inherit;
         font-size: 18px;
-        /* 글쓰기 내용 크기 조정 */
+        border-bottom: 1px dashed #FFFFFF;
+        /* 본문 작성 Box의 크기 조정 */
         & > .ql-editor {
             height: 969px;
             &::before {
@@ -58,23 +60,38 @@ const QuillWrapper = styled.div`
     }
 `;
 
+const BookWriteButtons = styled.div`
+    padding: 80px 0;
+    display: flex;
+    justify-content: flex-end;
+    & > button {
+        width: 125px;
+        height: 50px;
+        background-color: #2424B2;
+        font-size: 24px;
+        color: #FFF;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        &:nth-child(n+2) {
+            margin-left: 30px;
+        }
+    }
+`;
+
 type BookWriteProp = {
-    bookData: {
-        title: string,
-        price: string,
-        author: string,
-        pubdate: string
-    },
+    bookData: bookDataType,
     post: {
         title: string,
         body: string
     }
     onWrite: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
-    onChange: ({ key, value }) => void
+    onChange: ({ key, value }) => void,
+    onCancle: () => void
 }
 
-const BookWrite = ({ bookData, post, onWrite, onChange }: BookWriteProp) => {
-    let { title: bookDataTitle, price, author, pubdate } = bookData;
+const BookWrite = ({ bookData, post, onWrite, onChange, onCancle }: BookWriteProp) => {
+    let { title: bookDataTitle, price, author, publisher } = bookData;
     bookDataTitle = bookDataTitle.replace(/<b>/gi, "").replace(/<\/b>/gi, "");
     author = author.replace(/<b>/gi, "").replace(/<\/b>/gi, "");
 
@@ -108,8 +125,7 @@ const BookWrite = ({ bookData, post, onWrite, onChange }: BookWriteProp) => {
             <BookInfoList>
                 <li>제목: {bookDataTitle}</li>
                 <li>가격: {price}원</li>
-                <li>저자: {author}</li>
-                <li>발행일: {pubdate}</li>
+                <li>저자: {author} | {publisher}</li>
             </BookInfoList>
             <TitleInput
                 placeholder="[ 여기에 제목 입력 ]"
@@ -119,7 +135,10 @@ const BookWrite = ({ bookData, post, onWrite, onChange }: BookWriteProp) => {
             <QuillWrapper>
                 <div ref={quillElement}></div>
             </QuillWrapper>
-            <button onClick={onWrite}>글 쓰기</button>
+            <BookWriteButtons>
+                <button onClick={onWrite}>글 쓰기</button>
+                <button onClick={onCancle}>취소</button>
+            </BookWriteButtons>
         </BookWriteResponsiveBlock>
     );
 }

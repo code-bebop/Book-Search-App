@@ -21,6 +21,7 @@ type ItemType = {
     image: string,
     price: string,
     author: string,
+    publisher: string,
     pubdate: string
 }
 

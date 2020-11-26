@@ -89,7 +89,7 @@ const Pagination = ({ postCount, curPage }: PaginationProps) => {
                 ))}
             </PaginationList>
             {
-                curPage !== pageNumbers.length ?
+                curPage < pageNumbers.length ?
                 <PaginationButton to={`${match.url}?page=${curPage + 1}`}>다음</PaginationButton> :
                 <DisablePaginationButton>다음</DisablePaginationButton>
             }

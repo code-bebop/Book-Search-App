@@ -80,13 +80,14 @@ type BookListItemProps = {
     image: string,
     price: string,
     author: string,
+    publisher: string,
     pubdate: string
   },
   index: number
 }
 
 const BookListItem = ({ item, index }: BookListItemProps) => {
-  let { title, image, price, author, pubdate } = item;
+  let { title, image, price, author, publisher, pubdate } = item;
 
   title = title.replace(/<b>/gi, "").replace(/<\/b>/gi, "");
   author = author.replace(/<b>/gi, "").replace(/<\/b>/gi, "");
@@ -103,7 +104,7 @@ const BookListItem = ({ item, index }: BookListItemProps) => {
             <dt>정가</dt>
             <dd>{price}</dd>
             <dt>저자</dt>
-            <dd>{author}</dd>
+            <dd>{author} | {publisher}</dd>
             <dt>출간일</dt>
             <dd>{pubdate}</dd>
           </dl>
