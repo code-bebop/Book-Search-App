@@ -113,7 +113,7 @@ export interface PostProps {
 
 const Post = ({ post, nextPost, prevPost }: PostProps) => {
     let { title: postTitle, body, publishedDate, bookInfo } = post;
-    let { title: bookTitle, author, publisher, price } = bookInfo;
+    let { title: bookTitle, author, publisher, price, image } = bookInfo;
     console.log(prevPost, nextPost);
     
     publishedDate = publishedDate.substring(0, publishedDate.indexOf("T"));
@@ -129,11 +129,11 @@ const Post = ({ post, nextPost, prevPost }: PostProps) => {
                 <p className="PostBlock_body">{body}</p>
             </PostContent>
             <PostBookInfo>
-                <div style={{backgroundColor: '#DDD', width: '150px', height: '200px'}}></div>
+                <img src={image} alt={bookTitle}/>
                 <dl>
                     <dt>{bookTitle}</dt>
                     <dd>{author} | {publisher}</dd>
-                    <dd>{price}</dd>
+                    <dd>{price} 원</dd>
                 </dl>
             </PostBookInfo>
             <PostButtons>
