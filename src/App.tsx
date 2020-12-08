@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link, Switch, Route, Redirect, useRouteMatch, useLocation } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link, Switch, Route, Redirect, useLocation } from "react-router-dom";
 import styled from 'styled-components';
 
 import BookSearchPage from './pages/BookSearchPage';
@@ -8,6 +8,7 @@ import PostListPage from './pages/PostListPage';
 import PostPage from './pages/PostPage';
 
 const LinkWrapper = styled.nav`
+    z-index: 1;
     position: fixed;
     top: 0;
     left: 0;
@@ -15,11 +16,71 @@ const LinkWrapper = styled.nav`
     height: 100vh;
     background: rgba(15, 15, 16, .6);
     backdrop-filter: blur(7px);
+    transition: left .35s;
+    &.on {
+        left: 0;
+    }
+    &.off {
+        left: -300px;
+    }
+`;
+
+const Button = styled.button`
+    border: 4px solid #3F3FEA;
+    border-radius: 10px;
+    outline: none;
+    background-color: transparent;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+`;
+
+const OpenButton = styled(Button)`
+    position: fixed;
+    top: 60px;
+    left: 60px;
+    z-index: 2;
+    & > div {
+        width: 14px;
+        height: 3px;
+        background: #FFF;
+        position: absolute;
+        left: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: width .35s;
+    }
+    &::before,
+    &::after {
+        display: block;
+        content: '';
+        height: 3px;
+        background: #FFF;
+        position: absolute;
+        left: 8px;
+        transform: translateY(-50%);
+        transition: width .35s;
+    }
+    &::before {
+        width: 22px;
+        top: 25%;
+    }
+    &::after {
+        width: 18px;
+        top: 75%
+    }
+    &.on {
+        & > div,
+        &::before,
+        &::after {
+            width: 27px;
+        }   
+    }
 `;
 
 const LinkList = styled.ul`
     position: absolute;
-    top: 100px;
+    top: 170px;
     left: 60px;
     color: #fff;
     font-family: "DungGeunMo";
@@ -60,9 +121,12 @@ const App = () => {
     const location = useLocation();
     console.info(location);
     const pathname = location.pathname;
+
+    const [onNav, setOnNav] = useState(false);
+
     return (
         <>
-            <LinkWrapper>
+            <LinkWrapper className={onNav ? "on" : "off"}>
                 <LinkList>
                     <li>
                         <Link to="/BookSearch" className={pathname === '/BookSearch' ? 'on' : ''}>책 검색하기</Link>
@@ -72,6 +136,10 @@ const App = () => {
                     </li>
                 </LinkList>
             </LinkWrapper>
+            <OpenButton className={onNav ? "on" : "off"} onClick={() => { setOnNav(!onNav) }}>
+                <div></div>
+            </OpenButton>
+
             <Switch>
                 <Route path="/BookSearch" component={BookSearchPage} />
                 <Route path="/BookWrite" component={BookWritePage} />
