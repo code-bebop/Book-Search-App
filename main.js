@@ -196,7 +196,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.tsx");
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1962,6 +1962,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\nconst reportWebVitals = onPerfEntry => {\r\n  if (onPerfEntry && onPerfEntry instanceof Function) {\r\n    __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! web-vitals */ \"./node_modules/web-vitals/dist/web-vitals.es5.min.js\")).then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {\r\n      getCLS(onPerfEntry);\r\n      getFID(onPerfEntry);\r\n      getFCP(onPerfEntry);\r\n      getLCP(onPerfEntry);\r\n      getTTFB(onPerfEntry);\r\n    });\r\n  }\r\n};\r\n\r\n/* harmony default export */ __webpack_exports__[\"default\"] = (reportWebVitals);\r\n\n\n//# sourceURL=webpack:///./src/reportWebVitals.js?");
+
+/***/ }),
+
+/***/ 0:
+/*!*****************************!*\
+  !*** multi ./src/index.tsx ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = __webpack_require__(/*! ./src/index.tsx */\"./src/index.tsx\");\n\n\n//# sourceURL=webpack:///multi_./src/index.tsx?");
 
 /***/ })
 
