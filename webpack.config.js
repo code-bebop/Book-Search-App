@@ -6,12 +6,10 @@ require('dotenv').config();
 
 module.exports = {
   mode: 'development',
-  entry: {
-    main: './src/index.tsx',
-  },
+  entry: ['./src/index.tsx'],
   output: {
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
-    path: path.resolve('./dist'),
   },
   module: {
     rules: [
@@ -37,7 +35,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
       title: '책 추천 게시판',
-      publicPath: '/',
     }),
     new CleanWebpackPlugin(),
     new webpack.DefinePlugin({
@@ -55,7 +52,7 @@ module.exports = {
     stats: 'errors-only',
     proxy: {
       '/api/*': {
-        target: 'http://localhost:4000',
+        target: 'http://codebebop.tk',
         changeOrigin: true,
       },
       '/v1/*': {

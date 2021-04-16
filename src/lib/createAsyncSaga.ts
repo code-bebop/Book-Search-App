@@ -46,7 +46,7 @@ function createAsyncSaga<P1, P2, P3> (
             const response: P2 = isPayloadAction<P1>(action)
                 ? yield call(promiseCreator, action.payload)
                 : yield call(promiseCreator);
-            yield put(asyncActionCreator.success(response));
+            yield put (asyncActionCreator.success(response));
         } catch (e) {
             console.log(e);
             yield put (asyncActionCreator.failure(e));
