@@ -1,6 +1,8 @@
 # Book-Search-App
 Naver 검색 Open API를 사용하여 간단한 책 검색 / 책 추천 게시판 웹사이트를 만드는 프로젝트
 
+[Book-Search-App 프로젝트 링크](https://code-bebop.github.io/Book-Search-App)
+
 ---
 
 # 제공하는 기능
@@ -77,10 +79,13 @@ Webpack또한 개념은 알고 있었으나 직접 사용하여 프로젝트를 
 그 우려는 어느 정도 맞았다. 처음 webpack.config을 설정해보는 입장에서 꽤나 복잡했기 때문이다. 하지만 배우고 나서 보니 굉장히 편한 라이브러리였고, 프론트엔드라면 반드시 알아야 하는 라이브러리였다.
 
 ## Server
-게시판 기능을 만드려면 게시물이 저장될 서버도 있어야 한다. 이 프로젝트에서는 node.js의 koa와 mongoDB를 사용해서 서버를 만들었다. (사실 서버라고 하기도 부끄럽다.)
-서버가 제공하는 API 기능은  1. 전체 포스트 읽기, 2. 특정 포스트 읽기, 3. 포스트 쓰기 세 가지다.
+~~게시판 기능을 만드려면 게시물이 저장될 서버도 있어야 한다. 이 프로젝트에서는 node.js의 koa와 mongoDB를 사용해서 서버를 만들었다. (사실 서버라고 하기도 부끄럽다.)
+서버가 제공하는 API 기능은  1. 전체 포스트 읽기, 2. 특정 포스트 읽기, 3. 포스트 쓰기 세 가지다.~~
 
-그런데 이 서버는 아직 온라인에 호스팅하지 않았다. 다만 [Book_Search-App_RESTAPI라는 이름의 repository](https://github.com/code-bebop/Book-Search-App_RESTAPI)에 코드를 올려놓았다.
+~~그런데 이 서버는 아직 온라인에 호스팅하지 않았다. 다만 [Book_Search-App_RESTAPI라는 이름의 repository](https://github.com/code-bebop/Book-Search-App_RESTAPI)에 코드를 올려놓았다.~~
+
+그래도 작동하는 프로젝트를 보여주고 싶어서 Oracle Cloud에 ubuntu VM을 만들어서 24시간 돌아가는 개인 서버를 만들었다.
+개인 서버는 nginx + pm2 + node.js 를 사용해서 만들었다.
 
 ---
 
