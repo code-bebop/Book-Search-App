@@ -41,7 +41,7 @@ useEffect내부의 window scroll 이벤트리스너는 스크롤이 문서의 �
 
 ## 무한 스크롤 기능
 스크롤이 문서의 끝까지 닿았음을 감지하는 로직을 이렇게 구성하였다.
-```
+```js
 const getDocumentHeight = () => {
   const body = document.body;
   const html = document.documentElement;
